@@ -29,4 +29,13 @@ public class BookController {
     public Collection<Book> getAllBooks(){
         return this.repo.getAllBook();
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteBook(@RequestBody Book book){
+            this.repo.delete(book);
+    }
+    // @UpdateMapping("update/{id}")
+    // public Book updateBook(@RequestBody Book book){
+    //      this.repo.Update()
+    // }
 }
