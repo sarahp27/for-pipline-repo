@@ -28,8 +28,9 @@ public class BookRepository implements IBookRepository<Book> {
         this.booklistrepo.remove(book.getId(), book);
 
     }
-    public Book Update(Book book){
-       int  exectingBook = booklistrepo.findById( book.getId()) ;
-       
+    public void Update(Book book){
+       this.booklistrepo.put(book.getId(), book);
 
+
+}
 }
