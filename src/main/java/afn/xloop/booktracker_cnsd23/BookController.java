@@ -3,6 +3,7 @@ package afn.xloop.booktracker_cnsd23;
 import java.util.Collection;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,12 +31,13 @@ public class BookController {
         return this.repo.getAllBook();
     }
 
-    // @DeleteMapping("/delete/{id}")
-    // public void deleteBook(@RequestBody Book book){
-    //         this.repo.delete(book);
-    // }
-    // @UpdateMapping("update/{id}")
-    // public Book updateBook(@RequestBody Book book){
-    //      this.repo.Update(book);
-    // }
+    @DeleteMapping("/delete/{id}")
+    public  void deleteBook(@RequestBody Book book){
+            this.repo.delete(book);
+            // return "book is" + book.getTitle();
+    }
+    @UpdateMapping("update/{id}")
+    public Book updateBook(@RequestBody Book book){
+        return this.repo.Update(book);
+    }
 }
