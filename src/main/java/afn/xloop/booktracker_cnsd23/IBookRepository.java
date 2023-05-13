@@ -6,5 +6,5 @@ public interface IBookRepository<T> {
     public void save(T t);
     public Collection<T> getAllBook();
     public void delete(T t);
-    public Book Update(T t);
+    public void Update(T t);
 }

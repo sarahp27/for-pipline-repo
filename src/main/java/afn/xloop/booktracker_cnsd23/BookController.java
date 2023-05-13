@@ -5,7 +5,9 @@ import java.util.Collection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +23,9 @@ public class BookController {
 
     //localhost:8080/books
     @PostMapping("")
-    public void createBook(@RequestBody Book book){
+    public String createBook(@RequestBody Book book){
         this.repo.save(book);
+        return "this book is added"+book.getTitle();
         
     }
 
@@ -32,12 +35,14 @@ public class BookController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public  void deleteBook(@RequestBody Book book){
-            this.repo.delete(book);
-            // return "book is" + book.getTitle();
+    public  String  deleteBook(@RequestBody Book book){
+           this.repo.delete(book);
+            return "book is  " + book.getTitle();
     }
-    @UpdateMapping("update/{id}")
-    public Book updateBook(@RequestBody Book book){
-        return this.repo.Update(book);
-    }
+    @PutMapping("update/{id}")
+    public String updateBook(@RequestBody Book book ){
+         this.repo.Update(book);
+     
+         return "this book Updated  " + book.getTitle();
+        }
 }
