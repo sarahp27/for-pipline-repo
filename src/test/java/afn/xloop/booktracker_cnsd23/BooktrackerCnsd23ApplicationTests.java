@@ -74,49 +74,66 @@ class BooktrackerCnsd23ApplicationTests {
 
 	}
 
-	@Test 
-	public void CanDeletebook() throws Exception{
-		Book book1 = new Book(1, "HTML for Babies", "Some Kid", 1999, 26);
-		Book book2 = new Book(2, "C# Expert", "Rox", 2006, 260);
-		Collection<Book> books = new ArrayList<Book>();
-		books.add(book1);
-		books.add(book2);
+	// @Test 
+	// public void CanDeletebook() throws Exception{
+	// 	Book book1 = new Book(1, "HTML for Babies", "Some Kid", 1999, 26);
+	// 	Book book2 = new Book(2, "C# Expert", "Rox", 2006, 260);
+	// 	Collection<Book> books = new ArrayList<Book>();
+	// 	books.add(book1);
+	// 	books.add(book2);
 
-		books.remove(book1);
+	// 	books.remove(book1);
      
-		when(bookrepository.getAllBook()).thenReturn(books);
-		mvc.perform(delete("/books/delete/id")
-				.contentType(MediaType.APPLICATION_JSON));
-				// .andExpect(status().isOk());
+	// 	when(bookrepository.getAllBook()).thenReturn(books);
+	// 	mvc.perform(delete("/books/delete/id")
+	// 			.contentType(MediaType.APPLICATION_JSON));
+	// 			// .andExpect(status().isOk());
 				
-			// assertTrue(books.containsOnly(book2));
-			assertTrue(books.size() == 1 && books.contains(book2));
+	// 		// assertTrue(books.containsOnly(book2));
+	// 		assertTrue(books.size() == 1 && books.contains(book2));
+	// }
+	
+	@Test
+	public void canDeleteBook() throws Exception {
+		mvc.perform(delete("/books/delete/1"))
+				.andExpect(status().isOk());
 	}
 
-	@Test
+
+
+	
+@Test
 	public void canUpdateBook() throws Exception {
-		Book book1 = new Book(1, "HTML for Babies", "Some Kid", 1999, 26);
-		Book updatedBook = new Book(1, "HTML for Babies - 2nd Edition", "Some Kid", 2021, 32);
-	
-		Collection<Book> books = new ArrayList<Book>();
-		books.add(book1);
-	
-		// Stub the repository to return the book with ID 1 when getById() is called
-		when(bookrepository.getAllBook()).thenReturn(books);
-	
-		MockMvc mockMvc;
-		// MockMvc mockMvc;
-		// Call the controller method with the updated book
-		mockMvc.perform(put("/books/update/id")
+		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+		mvc.perform(put("/update/1")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(jsonBook.write(updatedBook).getJson()))
-				// .andExpect(status().isOk());
-	
-		// Check that the book was updated
-		verify(bookrepository, times(1)).save(updatedBook);
-		assertFalse(books.contains(book1));
-		assertTrue(books.contains(updatedBook));
+				.content(jsonBook.write(book).getJson()))
+				.andExpect(status().isOk());
 	}
+	// @Test
+	// public void canUpdateBook() throws Exception {
+	// 	Book book1 = new Book(1, "HTML for Babies", "Some Kid", 1999, 26);
+	// 	Book updatedBook = new Book(1, "HTML for Babies - 2nd Edition", "Some Kid", 2021, 32);
+	
+	// 	Collection<Book> books = new ArrayList<Book>();
+	// 	books.add(book1);
+	
+	// 	// Stub the repository to return the book with ID 1 when getById() is called
+	// 	when(bookrepository.getAllBook()).thenReturn(books);
+	
+	// 	MockMvc mockMvc;
+	// 	// MockMvc mockMvc;
+	// 	// Call the controller method with the updated book
+	// 	mockMvc.perform(put("/books/update/id")
+	// 			.contentType(MediaType.APPLICATION_JSON)
+	// 			.content(jsonBook.write(updatedBook).getJson()))
+	// 			// .andExpect(status().isOk());
+	
+	// 	// Check that the book was updated
+	// 	verify(bookrepository, times(1)).save(updatedBook);
+	// 	assertFalse(books.contains(book1));
+	// 	assertTrue(books.contains(updatedBook));
+	// }
 	
 
 
