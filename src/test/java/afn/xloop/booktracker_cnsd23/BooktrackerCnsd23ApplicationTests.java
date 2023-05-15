@@ -92,10 +92,14 @@ class BooktrackerCnsd23ApplicationTests {
 	// 		// assertTrue(books.containsOnly(book2));
 	// 		assertTrue(books.size() == 1 && books.contains(book2));
 	// }
-	
+
 	@Test
 	public void canDeleteBook() throws Exception {
-		mvc.perform(delete("/books/delete/1"))
+		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
+		mvc.perform(delete("/books/delete/1")
+		.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonBook.write(book).getJson()))
+				
 				.andExpect(status().isOk());
 	}
 
@@ -105,7 +109,7 @@ class BooktrackerCnsd23ApplicationTests {
 @Test
 	public void canUpdateBook() throws Exception {
 		Book book = new Book(1, "The Great Gatsby", "F. Scott Fitzgerald", 1937, 420);
-		mvc.perform(put("/update/1")
+		mvc.perform(put("/books/update/1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonBook.write(book).getJson()))
 				.andExpect(status().isOk());
