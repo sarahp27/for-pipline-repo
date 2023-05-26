@@ -55,7 +55,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<fileName>app.jar</fileName>
 	</build>
 
 </project>
